@@ -24,21 +24,24 @@
 
   https://docs.arduino.cc/built-in-examples/basics/Blink/
 */
+#define BUZZER 11 //makes a varible called BUZZER its on pin
 
-// the setup function runs once when you press reset or power the board
 void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
   pinMode(10, OUTPUT);
-  pinMode(9,OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(BUZZER, OUTPUT);
 }
 
-// the loop function runs over and over again forever
 void loop() {
-  digitalWrite(10, HIGH);  // turn the LED on (HIGH is the voltage level)                     // wait for a second
-  digitalWrite(9, LOW);   // turn the LED off by making the voltage LOW
-  delay(500);     // wait for a second
-  
-  digitalWrite(9, HIGH);
-  digitalWrite(10, LOW);
-  delay(1000);           
+  // WEE
+  digitalWrite(10, HIGH); //Light Turn on
+  digitalWrite(9, LOW); // Light Turns off
+  tone(BUZZER, 1000);   // high tone
+  delay(500);
+
+  // OO
+  digitalWrite(9, HIGH); //Light Turn On
+  digitalWrite(10, LOW); // Light Turn off
+  tone(BUZZER, 600);    // low tone
+  delay(500);
 }
