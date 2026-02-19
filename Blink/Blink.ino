@@ -24,24 +24,47 @@
 
   https://docs.arduino.cc/built-in-examples/basics/Blink/
 */
-#define BUZZER 11 //makes a varible called BUZZER its on pin
+#define BUZZER 11
+#define FADE_LED 6
+
+int brightness = 0;
+int fadeAmount = 10;
 
 void setup() {
   pinMode(10, OUTPUT);
   pinMode(9, OUTPUT);
   pinMode(BUZZER, OUTPUT);
+  pinMode(FADE_LED, OUTPUT);
 }
 
 void loop() {
-  // WEE
-  digitalWrite(10, HIGH); //Light Turn on
-  digitalWrite(9, LOW); // Light Turns off
-  tone(BUZZER, 1000);   // high tone
-  delay(500);
 
-  // OO
-  digitalWrite(9, HIGH); //Light Turn On
-  digitalWrite(10, LOW); // Light Turn off
-  tone(BUZZER, 600);    // low tone
-  delay(500);
+  // ----- WEE -----
+  digitalWrite(10, HIGH);
+  digitalWrite(9, LOW);
+  tone(BUZZER, 1300);
+  fadeLED(280);
+
+  // ----- OO -----
+  digitalWrite(9, HIGH);
+  digitalWrite(10, LOW);
+  tone(BUZZER, 800);
+  fadeLED(280);
 }
+
+void fadeLED(int duration) {
+  unsigned long start = millis();
+
+  while (millis() - start < duration) {
+    analogWrite(FADE_LED, brightness);
+
+    brightness += fadeAmount;
+
+    if (brightness <= 0 || brightness >= 255) {
+      fadeAmount = -fadeAmount;
+    }
+
+    delay(280);
+  }
+}
+
